@@ -1,0 +1,146 @@
+// Online C compiler to run C program online
+#include <stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#include<stdbool.h>
+bool checkPalindrome(char*,int,int);
+
+
+int main() {
+    // Write C code here
+    int score = 0;
+    char str[100];
+    printf("Enter your string\n");
+    scanf("%s",str);
+    int i=0,j = 3;
+    while(j < strlen(str)){
+        if(checkPalindrome(str,i,j)){
+            score += 5;
+        }
+        if(checkPalindrome(str,i,j+1)){
+            score += 10;
+        }
+        i++;
+        j++;
+    }
+    // i =0 , j =4;
+    // while(j < strlen(str)){
+    //     if(checkPalindrome(str,i,j)){
+    //         score += 10;
+    //     }
+    //     i++;
+    //     j++;
+    // }
+    printf("%d",score);
+
+    return 0;
+}
+
+bool checkPalindrome(char *str,int start,int end){
+    while(start < end){
+        if(str[start] != str[end]){
+            return false;
+        }
+        start++;
+        end--;
+    }
+    return true;
+}
+
+
+Method 2)
+
+// Online C compiler to run C program online
+#include <stdio.h>
+#include<string.h>
+
+int main() {
+    int score = 0;
+    char *str;
+    printf("Enter the stirng\n");
+    scanf("%s",str);
+    int n = strlen(str);
+    for(int i=0;i<n;i++){
+        if(i + 3 < n){
+            if(str[i] == str[i+3] && str[i+1] == str[i+2]){
+                score += 5;
+            }
+        }
+        if(i + 4 < n){
+            if(str[i] == str[i+4] && str[i+1] == str[i+3]){
+                score+= 10;
+            }
+        }
+    }
+    
+    printf("%d",score);
+
+    return 0;
+}
+
+
+###########################################################################################
+Q3 )
+// Online C compiler to run C program online
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+int main() {
+    char* str = (char *)malloc(100 * sizeof(char));
+    char symbol, check;
+    printf("Enter a string\n");
+    scanf("%[^\n]s",str);
+    printf("Enter a char to be removed\n");
+    scanf(" %c",&symbol);
+    printf("Enter a char to be replaced\n");
+    scanf(" %c",&check);
+    for(int i=0;i<strlen(str);i++){
+        if(str[i] == symbol){
+            str[i] = check;
+            break;
+        }
+    }
+    printf("%s",str);
+
+    return 0;
+}
+
+###############################################################################
+
+Q2)   remove last occurence of a word -> in my code i also have to include full stopo if i want to delete last word.
+// Online C compiler to run C program online
+#include <stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+int main() {
+    // Write C code here
+    char **str = (char**)malloc(100 * sizeof(char *));
+    char *word = (char*)malloc(50 * sizeof(char));
+    char *replacedWord = (char*)malloc(50 * sizeof(char));
+    int index =0;
+    printf("Enter a string\n");
+    scanf("%[^\n]s",word);
+    printf("Enter word to be deleted\n");
+    scanf("%s",replacedWord);
+    char *token = strtok(word," ");
+    while(token != NULL){
+        str[index++] = token;
+        token = strtok(NULL," ");
+    }
+    
+    for(int i = index - 1;i>=0;i--){
+        if(strcmp(str[i],replacedWord) == 0){
+            strcpy(str[i],"");
+            break;
+        }
+    }
+    
+    for(int i=0;i<index;i++){
+        printf("%s ",str[i]);
+    }
+    
+
+    return 0;
+}

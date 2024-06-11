@@ -1,0 +1,238 @@
+5 june questions 
+
+Q1) 
+// Online C compiler to run C program online
+#include <stdio.h>
+#include<string.h>
+
+int main() {
+   char str[100];
+   char c;
+   char subString[100];
+   int cIdx = -1,sIdx = -1;
+    printf("Enter your string\n");
+   scanf("%[^\n]s",str);
+   
+   int n = strlen(str);
+    printf("Enter char to be searched\n");
+    scanf(" %c",&c);
+    printf("Enter the substring\n");
+    scanf("%s",subString);
+    
+    for(int i=0;i<strlen(str);i++){
+        if(str[i] == c){
+            cIdx = i;
+            break;
+        }
+    }
+    printf("%d\n",cIdx);
+    int j = 0, k = 0;
+    int subLen = strlen(subString);
+    
+    for(int i=0;i<n;i++){
+        if(str[i] == subString[j]){
+            k = i;
+            j=0;
+            while(j < subLen){
+                if(str[k] != subString[j]){
+                    break;
+                }else{
+                    k++;
+                    j++;
+                }
+            }
+        }
+        if(j == subLen){
+            sIdx = i;
+            break;
+        }
+    }
+    int sum = sIdx + cIdx;
+    printf("Sum of both positon is : %d",sum);
+
+    return 0;
+}
+
+
+
+
+###########################################################################################
+
+Q2)  comapre \
+
+// Online C compiler to run C program online
+#include <stdio.h>
+#include<string.h>
+#include<stdlib.h>
+
+char* compare(char*,char*);
+
+int main() {
+    int n;
+    printf("Enter n\n");
+    scanf("%d",&n);
+    char str[n][100];
+    char res[n][100];
+    printf("Enter all strings\n");
+    for(int i=0;i<n;i++){
+        char temp[100],temp1[100],temp2[100],ans[100];
+        scanf(" %[^\n]s",temp);
+        // strcpy(str[i],temp);
+        strncpy(temp1,temp,8);
+        strncpy(temp2,temp+9,8);
+       strcpy(res[i],compare(temp1,temp2));
+      
+    }
+    
+    for(int i=0;i<n;i++){
+        printf("%s\n",res[i]);
+    }
+    return 0;
+}
+
+char *compare(char *str1,char *str2){
+    int i=0;
+    while(i < 3){
+        char *t1 = strtok(str1,"/");
+        char *t2 = strtok(str2,"/");
+        if(atoi(t1) < atoi(t2)){
+            return "Earlier";
+        }else if(atoi(t1) > atoi(t2)){
+            return "Later";
+        }
+        t1 = strtok(NULL,"/");
+        t2 = strtok(NULL,"/");
+        i++;
+    }
+    return "Equal";
+    
+}
+
+####################################################################################
+
+Q4 )
+
+// Online C compiler to run C program online
+#include <stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#include<stdbool.h>
+
+bool checkVowel(char);
+
+int main() {
+   
+   char str[100];
+   int count =0, conso = 0,currConso = 0;
+   printf("Enter the string\n");
+   scanf("%s",str);
+   for(int i=0;i<strlen(str);i++){
+      if(!checkVowel(str[i])) conso++;
+   }
+ 
+   int i=0;
+   while(i < strlen(str) && i != strlen(str)-1){
+       if(checkVowel(str[i])){
+         
+            if(currConso > conso) count++;
+       }else{
+             currConso++;
+           conso--;
+            if(currConso > conso) count++;
+       }
+       
+       i++;
+   }
+   printf("Total no. of partions possible are: \n");
+   printf("%d",count);
+   
+
+    return 0;
+}
+
+
+bool checkVowel(char ch){
+   if(ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u') return true;
+   return false;
+   
+}
+
+###########################################################################################
+Q3 )
+
+
+// Online C compiler to run C program online
+#include <stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#include<stdbool.h>
+
+bool checkAnagram(char*,char*);
+
+int main() {
+        
+    char str[1000];  
+    char words[100][100];
+     char ans[100][100];
+     
+    int hash1[26] = {0};
+    int hash2[26] = {0};
+    int index = 0,k=0;
+    printf("Enter your string\n");
+    scanf("%[^\n]s",str);
+    char *token = strtok(str," ");
+    while(token != NULL){
+        strcpy(words[index++],token);
+        token = strtok(NULL," ");
+    
+    }
+    for(int i=0;i<index;i++){
+        bool flag = true;
+       for(int j=i+1;j<index;j++){
+           if(strcmp(words[i],words[j]) == 0) {
+               flag = false;
+               strcpy(words[j],"");
+              
+           }
+       if(strlen(words[i]) == strlen(words[j])){
+           if(checkAnagram(words[i],words[j])){
+               flag = false;
+               strcpy(words[j],"");
+           }
+       }
+       }
+       if(!flag){
+           strcpy(words[i],"");
+       }
+       if(flag){
+           strcpy(ans[k],words[i]);
+           k++;
+       }
+    
+    }
+    
+    
+   for(int i=0;i<k;i++){
+printf("%s ",ans[i]);
+       
+   }
+    return 0;
+}
+
+bool checkAnagram(char *temp1,char *temp2){
+    int hash1[26] = {0};
+    int hash2[26] = {0};
+    
+    for(int i=0;i<strlen(temp1);i++){
+        hash1[temp1[i] - 'a']++;
+        hash2[temp2[i] - 'a']++;
+    }
+    
+    for(int i =0;i<26;i++){
+        if(hash1[i] != hash2[i]){
+            return false;
+        }
+    }
+    return true;
+}
+

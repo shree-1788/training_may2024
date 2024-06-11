@@ -1,0 +1,182 @@
+Q1 ) 
+/******************************************************************************
+
+                            Online C Compiler.
+                Code, Compile, Run and Debug C program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <stdio.h>
+#include<string.h>
+int main()
+{
+    char test[1000];
+    char ans[100][100];
+    int j =0;
+   printf("Enter the string: \n");
+   fgets(test,1000,stdin);
+   
+   
+  char *token = strtok(test," ");
+  while(token != NULL){
+      strcpy(ans[j],token);
+      j++;
+      token = strtok(NULL," ");
+  }
+ 
+   
+   
+  for(int i=0;i<j;i++){
+      char ch = toupper(ans[i][0]);
+      ans[i][0] = ch;
+  }
+   
+for(int i=0;i<j;i++){
+    printf("%s ",ans[i]);
+}
+
+    return 0;
+}
+ ##########################################################################
+
+
+/******************************************************************************
+
+                            Online C Compiler.
+                Code, Compile, Run and Debug C program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+/******************************************************************************
+
+                            Online C Compiler.
+                Code, Compile, Run and Debug C program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <stdio.h>
+#include<string.h>
+int main()
+{
+ char test[100];
+char ans[100];
+int j=0;
+ printf("Enter string: \n");
+scanf("%s",test);
+int n = strlen(test);
+char prev = test[0];
+for(int i=1;i<strlen(test);i++){
+  if(prev != test[i]){
+      ans[j] = prev;
+      j++;
+      prev = test[i];
+  }else{
+      while(i < n && prev == test[i]){
+          i++;
+      }
+      prev = test[i];
+  }
+
+}
+if(test[n-1] != test[n-2]){
+    ans[j] = prev;
+}
+printf("%s",ans);
+
+    return 0;
+}
+
+####################################################################
+Q3 )
+#include<stdlib.h>
+#include<stdio.h>
+#include<string.h>
+
+int main(){
+    
+    char str[1024];
+    char temp[100];
+    int j=0;
+    printf("Enter string: \n");
+    fgets(str,1024,stdin);
+    char words[1000][1000];
+    char *token = strtok(str,"|");
+    while(token != NULL){
+        strcpy(words[j],token);
+        j++;
+        token = strtok(NULL,"|");
+    }
+    
+    for(int i=0;i<j;i++){
+        for(int k=i+1;k<j;k++){
+            if(strcmp(words[i],words[k]) > 0){
+                strcpy(temp,words[i]);
+                  strcpy(words[i],words[k]);
+                    strcpy(words[k],temp);
+            }
+        }
+    }
+    for(int i=0;i<j;i++){
+       if(i != j -1)
+        printf("|%s",words[i]);
+        else
+        printf("|%s|",words[i]);
+    }
+    return 0;
+}
+#######################################################
+Q4 )
+
+
+// Online C compiler to run C program online
+#include <stdio.h>
+#include<string.h>
+#include <stdbool.h>
+
+int main() {
+    char str[100];
+    printf("Enter string: \n");
+    scanf("%s",str);
+   
+    
+  int i=0,j=0;
+  int len = strlen(str);
+ 
+  while(1){
+       bool flag = false;
+      for( i=0,j=0;i<len;i++){
+          if(i < len -1 && str[i+1] - str[i] == 1){
+              i++;
+             flag = true;
+          }else{
+              str[j++] = str[i];
+              
+          }
+      }
+      if(!flag) {
+          break;
+      }
+      str[j] = '\0';
+      len = j;
+      
+  }
+
+    printf("%s",str);
+    
+
+    return 0;
+}
+
+
+
+
+
+/*
+Author : Shreerang Patil
+Capitalise first char
+Date : 30 May 2024
+*/
+
